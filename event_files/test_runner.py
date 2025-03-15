@@ -2,7 +2,7 @@ import subprocess
 import time
 import os
 
-# Define test cases (input, expected_output, time_limit in seconds)
+# Define test cases (input file, expected output file, time limit in seconds)
 test_cases = [
     ("2input1.txt", "2output1.txt", 4),
     ("2input2.txt", "2output2.txt", 4),
@@ -27,12 +27,12 @@ if not solution_file:
     print("❌ No valid solution file found (.py, .java, .cpp)")
     exit(1)
 
-# Determine the language and compilation (if needed)
+# Determine the language and setup execution command
 if solution_file.endswith(".py"):
     run_command = ["python3", solution_file]
 elif solution_file.endswith(".java"):
     compile_command = ["javac", solution_file]
-    run_command = ["java", solution_file.replace(".java", "")]
+    run_command = ["java", solution_file.replace(".java", "")] 
 elif solution_file.endswith(".cpp"):
     compiled_file = "solution.out"
     compile_command = ["g++", solution_file, "-o", compiled_file]
@@ -73,7 +73,7 @@ def run_test_case(input_file, expected_output_file, time_limit):
         print(f"✅ Passed {input_file} in {execution_time:.2f} seconds")
         return True
     else:
-        print(f"❌ Failed {input_file}. Expected {expected_output}, but got {actual_output}")
+        print(f"❌ Failed {input_file}. Expected: {expected_output}, but got: {actual_output}")
         return False
 
 # Run all test cases
